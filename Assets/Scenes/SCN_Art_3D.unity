@@ -6571,7 +6571,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   shootPoint: {fileID: 875810976}
   projectile: {fileID: 6993000638423429594, guid: 4fa75ff51994b5d48b38b6e56b8be562, type: 3}
-  timeBetweenShoots: 5
+  timeBetweenShoots: 1
 --- !u!4 &1337213726
 Transform:
   m_ObjectHideFlags: 0
