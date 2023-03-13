@@ -33,6 +33,13 @@ public class PlayerController : MonoBehaviour
         Vector3 moveVector = inputAxisVertical * moveSpeed * transform.forward;
         bool isMoving = inputAxisVertical != 0;
 
+        /* BUG:
+         * Quando segura ambos os valos/botões do eixo vertical (W & S || as setas ):
+         * o inputAxisVertical fica entre 0,1 e -0,1, deixando o isMoving true,
+         * assim a animação toca, mas o personagem nem sempre se mexe, ou sai muito lentamente do lugar
+         * dando a senação de patinar.
+         */
+
         // Handle Jump
         if (controller.isGrounded)
         {
