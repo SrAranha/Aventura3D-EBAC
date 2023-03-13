@@ -8,13 +8,14 @@ public class GunBase : MonoBehaviour
     public float timeBetweenShoots;
 
     private Inputs inputs;
+    private bool _canShoot = true;
     private void Start()
     {
         inputs = new Inputs();
         inputs.Enable();
 
-        inputs.Gameplay.Shoot.performed += ctx => StartCoroutine(Fire());
-        inputs.Gameplay.Shoot.canceled += ctx => StopCoroutine(Fire());
+        inputs.Gameplay.Shoot.performed += ctx => StartCoroutine(StartShoot());
+        inputs.Gameplay.Shoot.canceled += ctx => StopCoroutine(StartShoot());
     }
     private void OnEnable()
     {
@@ -29,9 +30,14 @@ public class GunBase : MonoBehaviour
         var shoot = Instantiate(projectile);
         shoot.transform.SetPositionAndRotation(shootPoint.position, shootPoint.rotation);
     }
-    IEnumerator Fire()
+    IEnumerator StartShoot()
     {
-        Shoot();
-        yield return new WaitForSeconds(timeBetweenShoots);
+        if (_canShoot)
+        {
+            Shoot();
+            _canShoot = false;
+            yield return new WaitForSeconds(timeBetweenShoots);
+            _canShoot = true;
+        }
     }
 }
