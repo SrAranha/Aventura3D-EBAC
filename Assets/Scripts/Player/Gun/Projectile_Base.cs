@@ -7,19 +7,22 @@ public class Projectile_Base : MonoBehaviour
     public float projectileSpeed;
     public float timeToDestroy = 2f;
 
-    //private AudioSource audioSource;
-
     private void Awake()
     {
         Destroy(gameObject, timeToDestroy);
     }
     private void Start()
     {
-        //audioSource = GetComponent<AudioSource>();
-        //audioSource.Play();
+        
     }
     private void Update()
     {
         gameObject.transform.Translate(projectileSpeed * Time.deltaTime * Vector3.forward);
+    }
+    private void OnCollisionEnter(Collision collision)
+    {
+        var damageable = collision.gameObject.GetComponent<IDamageable>();
+        damageable?.Damage(damage);
+        Destroy(gameObject);
     }
 }
