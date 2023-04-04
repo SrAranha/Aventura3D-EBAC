@@ -16,7 +16,7 @@ public class PlayerGuns : MonoBehaviour
     }
     private void OnDisable()
     {
-        inputs.Disable();
+        inputs?.Disable();
     }
     private void Awake()
     {
