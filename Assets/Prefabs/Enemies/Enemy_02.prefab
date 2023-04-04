@@ -47,8 +47,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   startLife: 5
-  timeToDestroy: 2
   _currentLife: 0
+  timeToDestroy: 2
+  animator: {fileID: 4890661765219722057}
 --- !u!65 &5097553702409205390
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -151,6 +152,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8bec79f815163ae43b0faf61a3b8baca, type: 3}
+--- !u!95 &4890661765219722057 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 5198380618090564724, guid: 8bec79f815163ae43b0faf61a3b8baca, type: 3}
+  m_PrefabInstance: {fileID: 863359997630869309}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &6689561579189846421 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6281779893053664936, guid: 8bec79f815163ae43b0faf61a3b8baca, type: 3}

@@ -3,10 +3,18 @@ using UnityEngine;
 public class EnemyBase : MonoBehaviour, IDamageable
 {
     public int startLife;
-    public float timeToDestroy;
-    
     [SerializeField] private int _currentLife;
+    public float timeToDestroy;
 
+    [Header("Animation")]
+    public Animator animator;
+
+    private Collider _collider;
+
+    private void OnValidate()
+    {
+        _collider = GetComponent<Collider>();
+    }
     private void Start()
     {
         _currentLife = startLife;
@@ -21,8 +29,14 @@ public class EnemyBase : MonoBehaviour, IDamageable
             Death();
         }
     }
-    public void Death()
+    private void Death()
     {
+        _collider.enabled = false;
+        PlayAnimationByTrigger("Death");
         Destroy(gameObject, timeToDestroy);
+    }
+    private void PlayAnimationByTrigger(string trigger)
+    {
+        animator.SetTrigger(trigger);
     }
 }

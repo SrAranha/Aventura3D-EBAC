@@ -47,8 +47,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   startLife: 10
-  timeToDestroy: 2
   _currentLife: 0
+  timeToDestroy: 2
+  animator: {fileID: 3894010995976702718}
 --- !u!65 &7483071402383942916
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -154,5 +155,10 @@ PrefabInstance:
 --- !u!4 &2442432777902400968 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8115776127002297597, guid: 86dc2d7519f0fa047a4a9adbc81a8da7, type: 3}
+  m_PrefabInstance: {fileID: 5855881044027629877}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &3894010995976702718 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 7443898874300591051, guid: 86dc2d7519f0fa047a4a9adbc81a8da7, type: 3}
   m_PrefabInstance: {fileID: 5855881044027629877}
   m_PrefabAsset: {fileID: 0}
