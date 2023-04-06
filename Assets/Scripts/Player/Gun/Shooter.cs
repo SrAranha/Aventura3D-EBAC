@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class Shooter : MonoBehaviour
 {
-    public Projectile_Base prefabProjectile;
+    public ProjectileBase prefabProjectile;
     public Transform shootPoint;
     public float shootCooldown;
     public KeyCode keyToShot = KeyCode.Tab;

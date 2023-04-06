@@ -4,7 +4,7 @@ using UnityEngine;
 public class GunBase : MonoBehaviour
 {
     public Transform shootPoint;
-    public Projectile_Base projectile;
+    public ProjectileBase projectile;
     public float timeBetweenShoots;
 
     private Inputs inputs;
@@ -23,17 +23,21 @@ public class GunBase : MonoBehaviour
     }
     private void OnDisable()
     {
-        inputs.Disable();
+        inputs?.Disable();
     }
     private void Shoot()
     {
         var shoot = Instantiate(projectile);
         shoot.transform.SetPositionAndRotation(shootPoint.position, shootPoint.rotation);
     }
-    IEnumerator StartShoot()
+    public IEnumerator StartShoot(Transform target = null)
     {
         if (_canShoot)
         {
+            if (target)
+            {
+                shootPoint.transform.LookAt(target);
+            }
             Shoot();
             _canShoot = false;
             yield return new WaitForSeconds(timeBetweenShoots);
