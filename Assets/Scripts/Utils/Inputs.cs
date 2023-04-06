@@ -53,6 +53,15 @@ public partial class @Inputs : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""SwitchGuns"",
+                    ""type"": ""Button"",
+                    ""id"": ""3976976d-8a53-4f0a-b5bc-29f8f23e2d29"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -88,6 +97,17 @@ public partial class @Inputs : IInputActionCollection2, IDisposable
                     ""action"": ""Shoot"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""ab1ee380-27cd-41ec-b4fc-533a66678eb8"",
+                    ""path"": ""<Keyboard>/r"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SwitchGuns"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -99,6 +119,7 @@ public partial class @Inputs : IInputActionCollection2, IDisposable
         m_Gameplay_Shoot = m_Gameplay.FindAction("Shoot", throwIfNotFound: true);
         m_Gameplay_SwitchGun01 = m_Gameplay.FindAction("SwitchGun01", throwIfNotFound: true);
         m_Gameplay_SwitchGun02 = m_Gameplay.FindAction("SwitchGun02", throwIfNotFound: true);
+        m_Gameplay_SwitchGuns = m_Gameplay.FindAction("SwitchGuns", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -161,6 +182,7 @@ public partial class @Inputs : IInputActionCollection2, IDisposable
     private readonly InputAction m_Gameplay_Shoot;
     private readonly InputAction m_Gameplay_SwitchGun01;
     private readonly InputAction m_Gameplay_SwitchGun02;
+    private readonly InputAction m_Gameplay_SwitchGuns;
     public struct GameplayActions
     {
         private @Inputs m_Wrapper;
@@ -168,6 +190,7 @@ public partial class @Inputs : IInputActionCollection2, IDisposable
         public InputAction @Shoot => m_Wrapper.m_Gameplay_Shoot;
         public InputAction @SwitchGun01 => m_Wrapper.m_Gameplay_SwitchGun01;
         public InputAction @SwitchGun02 => m_Wrapper.m_Gameplay_SwitchGun02;
+        public InputAction @SwitchGuns => m_Wrapper.m_Gameplay_SwitchGuns;
         public InputActionMap Get() { return m_Wrapper.m_Gameplay; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -186,6 +209,9 @@ public partial class @Inputs : IInputActionCollection2, IDisposable
                 @SwitchGun02.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnSwitchGun02;
                 @SwitchGun02.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnSwitchGun02;
                 @SwitchGun02.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnSwitchGun02;
+                @SwitchGuns.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnSwitchGuns;
+                @SwitchGuns.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnSwitchGuns;
+                @SwitchGuns.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnSwitchGuns;
             }
             m_Wrapper.m_GameplayActionsCallbackInterface = instance;
             if (instance != null)
@@ -199,6 +225,9 @@ public partial class @Inputs : IInputActionCollection2, IDisposable
                 @SwitchGun02.started += instance.OnSwitchGun02;
                 @SwitchGun02.performed += instance.OnSwitchGun02;
                 @SwitchGun02.canceled += instance.OnSwitchGun02;
+                @SwitchGuns.started += instance.OnSwitchGuns;
+                @SwitchGuns.performed += instance.OnSwitchGuns;
+                @SwitchGuns.canceled += instance.OnSwitchGuns;
             }
         }
     }
@@ -208,5 +237,6 @@ public partial class @Inputs : IInputActionCollection2, IDisposable
         void OnShoot(InputAction.CallbackContext context);
         void OnSwitchGun01(InputAction.CallbackContext context);
         void OnSwitchGun02(InputAction.CallbackContext context);
+        void OnSwitchGuns(InputAction.CallbackContext context);
     }
 }

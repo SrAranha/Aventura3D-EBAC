@@ -9,6 +9,7 @@ public class PlayerGuns : MonoBehaviour
 
     private Inputs inputs;
     [SerializeField] private GunBase _activeGun;
+    [SerializeField] private int _activeGunIndex;
 
     private void OnEnable()
     {
@@ -22,24 +23,34 @@ public class PlayerGuns : MonoBehaviour
     {
         inputs = new Inputs();
         inputs.Enable();
+
         foreach (GunBase gun in gunsList)
         {
             gun.gameObject.SetActive(false);
         }
-        gunsList[0].gameObject.SetActive(true);
-        _activeGun = gunsList[0];
+        ResetActiveGun();
+        _activeGun.gameObject.SetActive(true);
     }
     private void Start()
     {
-        inputs.Gameplay.SwitchGun01.performed += ctx => SwitchGun(0);
-        inputs.Gameplay.SwitchGun02.performed += ctx => SwitchGun(1);
+        inputs.Gameplay.SwitchGuns.performed += ctx => SwitchGun();
     }
 
-    private void SwitchGun(int index)
+    private void SwitchGun()
     {
-        Debug.Log("Switching Gun!");
         _activeGun.gameObject.SetActive(false);
-        _activeGun = gunsList[index];
+        _activeGunIndex++;
+        if (_activeGunIndex == gunsList.Count)
+        {
+            ResetActiveGun();
+        }
+        _activeGun = gunsList[_activeGunIndex];
         _activeGun.gameObject.SetActive(true);
+        Debug.Log("Swithing to " + _activeGun);
+    }
+    private void ResetActiveGun()
+    {
+        _activeGunIndex = 0;
+        _activeGun = gunsList[_activeGunIndex];
     }
 }
