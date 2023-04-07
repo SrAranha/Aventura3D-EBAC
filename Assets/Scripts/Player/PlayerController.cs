@@ -11,19 +11,28 @@ public class PlayerController : MonoBehaviour
     public KeyCode sprintKey = KeyCode.LeftShift;
 
     private float gravity = -9.8f;
-    private CharacterController controller;
-    private Animator animator;
-    private float verticalSpeed;
+    private CharacterController _controller;
+    private Animator _animator;
+    private float _verticalSpeed;
+    private HealthBase _healthBase;
 
     private void OnValidate()
     {
-        controller = GetComponent<CharacterController>();
-        animator = GetComponentInChildren<Animator>();
+        _healthBase = GetComponent<HealthBase>();
+        _controller = GetComponent<CharacterController>();
+        _animator = GetComponentInChildren<Animator>();
+    }
+    private void Awake()
+    {
+        _healthBase.OnDeath += OnDeath;
     }
     // Update is called once per frame
     void Update()
     {
-        MovePlayer();
+        if (_healthBase.IsAlive())
+        {
+            MovePlayer();
+        }
     }
     private void MovePlayer()
     {
@@ -41,15 +50,15 @@ public class PlayerController : MonoBehaviour
          */
 
         // Handle Jump
-        if (controller.isGrounded)
+        if (_controller.isGrounded)
         {
             if (Input.GetKey(jumpKey))
             {
-                verticalSpeed = jumpForce;
+                _verticalSpeed = jumpForce;
             }
         }
-        verticalSpeed += gravity * Time.deltaTime;
-        moveVector.y = verticalSpeed;
+        _verticalSpeed += gravity * Time.deltaTime;
+        moveVector.y = _verticalSpeed;
 
         // Handle Sprint
         if (isMoving)
@@ -57,13 +66,20 @@ public class PlayerController : MonoBehaviour
             if (Input.GetKey(sprintKey))
             {
                 moveVector *= sprintFactor;
-                animator.speed = sprintFactor;
+                _animator.speed = sprintFactor;
             }
-            else animator.speed = 1f;
+            else _animator.speed = 1f;
         }
 
         // Move and Animate
-        controller.Move(Time.deltaTime * moveVector);
-        animator.SetBool("Run", isMoving);
+        _controller.Move(Time.deltaTime * moveVector);
+        _animator.SetBool("Run", isMoving);
+    }
+    private void OnDeath(HealthBase health)
+    {
+        if (!_healthBase.IsAlive())
+        {
+            _animator.SetTrigger("Death");
+        }
     }
 }

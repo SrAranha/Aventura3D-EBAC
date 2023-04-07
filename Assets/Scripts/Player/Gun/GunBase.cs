@@ -36,7 +36,9 @@ public class GunBase : MonoBehaviour
         {
             if (target)
             {
-                shootPoint.transform.LookAt(target);
+                Vector3 normalizedTarget = target.transform.position;
+                normalizedTarget.y += 1f;
+                shootPoint.transform.LookAt(normalizedTarget);
             }
             Shoot();
             _canShoot = false;

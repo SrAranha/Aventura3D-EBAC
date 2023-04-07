@@ -23,7 +23,6 @@ public class EnemyShooter : EnemyBase
         _playerInRange = Vector3.Distance(transform.position, _playerController.transform.position) < alertRadius;
         if (_playerInRange)
         {
-            Debug.Log("Player is in range");
             ShootAt(_playerController.transform);
             _pathWalk?.StopWalking(false);
         }

@@ -18,6 +18,7 @@ public class ProjectileBase : MonoBehaviour
     }
     private void OnCollisionEnter(Collision collision)
     {
+        Debug.Log("Collided with => " + collision.gameObject);
         foreach (var t in tagsToHit)
         {
             if (collision.transform.CompareTag(t))
