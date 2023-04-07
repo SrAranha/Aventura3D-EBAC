@@ -12,9 +12,9 @@ public class HealthBase : MonoBehaviour, IDamageable
     public Action<HealthBase> OnDeath;
 
     [Header("DEBUG")]
-    [SerializeField] private int _currentHealth;
-    [SerializeField] private bool _isAlive = true;
-    [SerializeField] private Collider _collider;
+    private int _currentHealth;
+    private bool _isAlive = true;
+    private Collider _collider;
 
     private void OnValidate()
     {
@@ -29,17 +29,22 @@ public class HealthBase : MonoBehaviour, IDamageable
     {
         UpdateHealthBar();
     }
-    public void ResetHealth()
+    public void ResetHealth(bool instant = true)
     {
-        _currentHealth = startingHealth;
-        //UpdateHealthBar();
+        if (instant)
+        {
+            _currentHealth = startingHealth;
+        }
+        else while (_currentHealth < startingHealth) 
+        {
+            _currentHealth = (int)Time.deltaTime * 1;
+        }
     }
     public void Damage(int damage)
     {
         if (_isAlive)
         {
             _currentHealth -= damage;
-            //UpdateHealthBar();
             if (_currentHealth <= 0)
             {
                 Kill();
@@ -61,7 +66,7 @@ public class HealthBase : MonoBehaviour, IDamageable
     {
         _isAlive = true;
         _collider.enabled = true;
-        ResetHealth();
+        ResetHealth(false);
     }
     public bool IsAlive()
     { 

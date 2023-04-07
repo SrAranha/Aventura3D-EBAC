@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
@@ -6,7 +7,10 @@ public class PlayerController : MonoBehaviour
     public float rotateSpeed;
     public float jumpForce;
     public float sprintFactor;
+    [Header("Checkpoints")]
     public bool startAtLastCheckpoint;
+    public bool hasRevive;
+    public float timeToRespawn;
     [Header("Keycodes")]
     public KeyCode jumpKey = KeyCode.Space;
     public KeyCode sprintKey = KeyCode.LeftShift;
@@ -53,7 +57,17 @@ public class PlayerController : MonoBehaviour
         if (!_healthBase.IsAlive())
         {
             _animator.SetTrigger("Death");
+            if (hasRevive)
+            {
+                StartCoroutine(Respawn());
+            }
         }
+    }
+    private IEnumerator Respawn()
+    {
+        yield return new WaitForSeconds(timeToRespawn);
+        SpawnAtLastCheckpoint();
+        _healthBase.Revive();
     }
     private void MovePlayer()
     {
