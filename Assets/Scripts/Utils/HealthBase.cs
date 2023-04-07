@@ -6,6 +6,8 @@ public class HealthBase : MonoBehaviour, IDamageable
     public int startingHealth;
     public bool destroyOnDeath;
     public float timeToDestroy;
+    public bool hasHealthBar;
+    public UIUpdater healthBarUpdater;
 
     public Action<HealthBase> OnDeath;
 
@@ -23,15 +25,21 @@ public class HealthBase : MonoBehaviour, IDamageable
     {
         ResetHealth();
     }
+    private void Update()
+    {
+        UpdateHealthBar();
+    }
     public void ResetHealth()
     {
         _currentHealth = startingHealth;
+        //UpdateHealthBar();
     }
     public void Damage(int damage)
     {
         if (_isAlive)
         {
             _currentHealth -= damage;
+            //UpdateHealthBar();
             if (_currentHealth <= 0)
             {
                 Kill();
@@ -48,6 +56,7 @@ public class HealthBase : MonoBehaviour, IDamageable
         }
         OnDeath?.Invoke(this);
     }
+    [NaughtyAttributes.Button]
     public void Revive()
     {
         _isAlive = true;
@@ -57,5 +66,12 @@ public class HealthBase : MonoBehaviour, IDamageable
     public bool IsAlive()
     { 
         return _isAlive;
+    }
+    private void UpdateHealthBar()
+    {
+        if (hasHealthBar)
+        {
+            healthBarUpdater.UpdateValue((float)_currentHealth / startingHealth);
+        }
     }
 }
