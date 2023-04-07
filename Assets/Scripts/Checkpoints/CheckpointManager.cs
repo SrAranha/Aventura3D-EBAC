@@ -14,7 +14,7 @@ public class CheckpointManager : Singleton<CheckpointManager>
         Debug.Log("Last Checkpoint => " + _lastCheckpoint);
         if (_lastCheckpoint > -1)
         {
-            for (int i = 0; i < _lastCheckpoint; i++)
+            for (int i = 0; i <= _lastCheckpoint; i++)
             {
                 checkpoints[i].CheckpointOn();
             }
@@ -22,6 +22,7 @@ public class CheckpointManager : Singleton<CheckpointManager>
     }
     public Vector3 LastCheckpointPosition()
     {
+        Debug.Log(checkpoints[_lastCheckpoint]);
         return checkpoints[_lastCheckpoint].transform.position;
     }
     [NaughtyAttributes.Button]

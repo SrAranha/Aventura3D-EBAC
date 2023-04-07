@@ -33,7 +33,10 @@ public class PlayerController : MonoBehaviour
     }
     private void Start()
     {
-        SpawnAtLastCheckpoint();
+        if (startAtLastCheckpoint)
+        {
+            SpawnAtLastCheckpoint();
+        }
     }
     // Update is called once per frame
     void Update()
@@ -66,6 +69,7 @@ public class PlayerController : MonoBehaviour
     private IEnumerator Respawn()
     {
         yield return new WaitForSeconds(timeToRespawn);
+        _animator.SetTrigger("Respawn");
         SpawnAtLastCheckpoint();
         _healthBase.Revive();
     }

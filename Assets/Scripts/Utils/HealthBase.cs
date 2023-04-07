@@ -29,16 +29,9 @@ public class HealthBase : MonoBehaviour, IDamageable
     {
         UpdateHealthBar();
     }
-    public void ResetHealth(bool instant = true)
+    public void ResetHealth()
     {
-        if (instant)
-        {
-            _currentHealth = startingHealth;
-        }
-        else while (_currentHealth < startingHealth) 
-        {
-            _currentHealth = (int)Time.deltaTime * 1;
-        }
+        _currentHealth = startingHealth;
     }
     public void Damage(int damage)
     {
@@ -66,7 +59,7 @@ public class HealthBase : MonoBehaviour, IDamageable
     {
         _isAlive = true;
         _collider.enabled = true;
-        ResetHealth(false);
+        ResetHealth();
     }
     public bool IsAlive()
     { 
