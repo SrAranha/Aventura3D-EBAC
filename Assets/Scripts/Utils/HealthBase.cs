@@ -9,6 +9,7 @@ public class HealthBase : MonoBehaviour, IDamageable
     public bool hasHealthBar;
     public UIUpdater healthBarUpdater;
 
+    public Action<HealthBase> OnDamage;
     public Action<HealthBase> OnDeath;
 
     [Header("DEBUG")]
@@ -42,6 +43,7 @@ public class HealthBase : MonoBehaviour, IDamageable
             {
                 Kill();
             }
+            OnDamage?.Invoke(this);
         }
     }
     private void Kill()

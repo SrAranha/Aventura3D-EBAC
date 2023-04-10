@@ -14,8 +14,12 @@ public class PlayerController : MonoBehaviour
     [Header("Keycodes")]
     public KeyCode jumpKey = KeyCode.Space;
     public KeyCode sprintKey = KeyCode.LeftShift;
+    [Header("Screen Shake")]
+    public float shakeAmplitude;
+    public float shakeFrequency;
+    public float shakeTime;
 
-    private float gravity = -9.8f;
+    private readonly float gravity = -9.8f;
     private CharacterController _controller;
     private Animator _animator;
     private float _verticalSpeed;
@@ -29,6 +33,7 @@ public class PlayerController : MonoBehaviour
     }
     private void Awake()
     {
+        _healthBase.OnDamage += OnDamage;
         _healthBase.OnDeath += OnDeath;
     }
     private void Start()
@@ -54,6 +59,10 @@ public class PlayerController : MonoBehaviour
             __checkPos.z += 3f;
             transform.position = __checkPos;
         }
+    }
+    private void OnDamage(HealthBase health)
+    {
+        ScreenShake.instance.ShakeScreen(shakeAmplitude, shakeFrequency, shakeTime);
     }
     private void OnDeath(HealthBase health)
     {
