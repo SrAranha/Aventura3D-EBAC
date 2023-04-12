@@ -42,7 +42,6 @@ public class CheckpointBase : MonoBehaviour
             PlayerPrefs.SetInt(_key, id);
         }
         _lastCheckpoint = PlayerPrefs.GetInt(_key);
-        Debug.Log("New Checkpoint => " + _lastCheckpoint);
     }
     private void OnTriggerEnter(Collider other)
     {

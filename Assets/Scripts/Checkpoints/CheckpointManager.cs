@@ -11,7 +11,6 @@ public class CheckpointManager : Singleton<CheckpointManager>
     void Start()
     {
         _lastCheckpoint = PlayerPrefs.GetInt(checkpointKey);
-        Debug.Log("Last Checkpoint => " + _lastCheckpoint);
         if (_lastCheckpoint > -1)
         {
             for (int i = 0; i <= _lastCheckpoint; i++)
@@ -22,7 +21,6 @@ public class CheckpointManager : Singleton<CheckpointManager>
     }
     public Vector3 LastCheckpointPosition()
     {
-        Debug.Log(checkpoints[_lastCheckpoint]);
         return checkpoints[_lastCheckpoint].transform.position;
     }
     [NaughtyAttributes.Button]
@@ -34,6 +32,5 @@ public class CheckpointManager : Singleton<CheckpointManager>
             checkpoint.CheckpointOff();
         }
         PlayerPrefs.SetInt(checkpointKey, _lastCheckpoint);
-        Debug.Log("Reseting Checkpoints");
     }
 }
