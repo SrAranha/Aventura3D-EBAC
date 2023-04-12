@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class CollectableBase : MonoBehaviour
 {
+    public ItemType itemType;
     public float timeToHide;
     public GameObject model;
 
@@ -27,6 +28,6 @@ public class CollectableBase : MonoBehaviour
     }
     private void OnCollectItem()
     {
-
+        InventoryManager.instance.AddItemByType(itemType);
     }
 }
