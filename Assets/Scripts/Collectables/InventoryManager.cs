@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using UnityEngine;
 
 public enum ItemType
 { 
@@ -8,6 +7,7 @@ public enum ItemType
 }
 public class InventoryManager : Singleton<InventoryManager>
 {
+    public InventoryUI inventoryUI;
     public List<ItemSetup> itemSetups;
 
     public void AddItemByType(ItemType type, int amount = 1)
@@ -15,14 +15,22 @@ public class InventoryManager : Singleton<InventoryManager>
         if (amount < 1) return; 
         var item = itemSetups.Find(i => i.itemType == type);
         item.inventory.quantity += amount;
-        Debug.Log("Added " + amount + "x " + type + " to inventory");
+        inventoryUI.UpdateUI(type);
     }
-    public void RemoveItemByType(ItemType type, int amount = 1)
+    public bool RemoveItemByType(ItemType type, int amount = 1)
     {
-        if (amount > 0) return;
         var item = itemSetups.Find(i => i.itemType == type);
-        item.inventory.quantity -= amount;
-        Debug.Log("Removed " + amount + "x " + type + " from inventory");
+        if (item.inventory.quantity > 0 && amount <= item.inventory.quantity)
+        {
+            item.inventory.quantity -= amount;
+            inventoryUI.UpdateUI(type);
+            return true;
+        }
+        else return false;
+    }
+    public ItemSetup GetItemByType(ItemType type)
+    {
+        return itemSetups.Find(i => i.itemType == type);
     }
     [NaughtyAttributes.Button]
     public void ResetInventory()
@@ -31,6 +39,7 @@ public class InventoryManager : Singleton<InventoryManager>
         {
             item.inventory.quantity = 0;
         }
+        inventoryUI.UpdateUI();
     }
     [NaughtyAttributes.Button]
     private void AddCoin()

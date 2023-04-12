@@ -37,24 +37,6 @@ public partial class @Inputs : IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""SwitchGun01"",
-                    ""type"": ""Button"",
-                    ""id"": ""25a883e4-7c98-49c4-98a8-23ea34134586"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""SwitchGun02"",
-                    ""type"": ""Button"",
-                    ""id"": ""ba5ca127-ed30-4434-ab89-8ca829c57160"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
                     ""name"": ""SwitchGuns"",
                     ""type"": ""Button"",
                     ""id"": ""3976976d-8a53-4f0a-b5bc-29f8f23e2d29"",
@@ -62,31 +44,18 @@ public partial class @Inputs : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Heal"",
+                    ""type"": ""Button"",
+                    ""id"": ""526e1316-5637-4eed-9e5a-61770eca820d"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
-                {
-                    ""name"": """",
-                    ""id"": ""60a75df4-d66e-48cf-a069-59d985281229"",
-                    ""path"": ""<Keyboard>/1"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""SwitchGun01"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""ccc6e849-5985-4a1a-a830-edcc57371a58"",
-                    ""path"": ""<Keyboard>/2"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""SwitchGun02"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
                 {
                     ""name"": """",
                     ""id"": ""70226285-646d-409a-a3ce-d7fdc0620f07"",
@@ -108,6 +77,17 @@ public partial class @Inputs : IInputActionCollection2, IDisposable
                     ""action"": ""SwitchGuns"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""f37347b5-85f0-44f8-805a-54c5275834c5"",
+                    ""path"": ""<Keyboard>/h"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Heal"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -117,9 +97,8 @@ public partial class @Inputs : IInputActionCollection2, IDisposable
         // Gameplay
         m_Gameplay = asset.FindActionMap("Gameplay", throwIfNotFound: true);
         m_Gameplay_Shoot = m_Gameplay.FindAction("Shoot", throwIfNotFound: true);
-        m_Gameplay_SwitchGun01 = m_Gameplay.FindAction("SwitchGun01", throwIfNotFound: true);
-        m_Gameplay_SwitchGun02 = m_Gameplay.FindAction("SwitchGun02", throwIfNotFound: true);
         m_Gameplay_SwitchGuns = m_Gameplay.FindAction("SwitchGuns", throwIfNotFound: true);
+        m_Gameplay_Heal = m_Gameplay.FindAction("Heal", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -180,17 +159,15 @@ public partial class @Inputs : IInputActionCollection2, IDisposable
     private readonly InputActionMap m_Gameplay;
     private IGameplayActions m_GameplayActionsCallbackInterface;
     private readonly InputAction m_Gameplay_Shoot;
-    private readonly InputAction m_Gameplay_SwitchGun01;
-    private readonly InputAction m_Gameplay_SwitchGun02;
     private readonly InputAction m_Gameplay_SwitchGuns;
+    private readonly InputAction m_Gameplay_Heal;
     public struct GameplayActions
     {
         private @Inputs m_Wrapper;
         public GameplayActions(@Inputs wrapper) { m_Wrapper = wrapper; }
         public InputAction @Shoot => m_Wrapper.m_Gameplay_Shoot;
-        public InputAction @SwitchGun01 => m_Wrapper.m_Gameplay_SwitchGun01;
-        public InputAction @SwitchGun02 => m_Wrapper.m_Gameplay_SwitchGun02;
         public InputAction @SwitchGuns => m_Wrapper.m_Gameplay_SwitchGuns;
+        public InputAction @Heal => m_Wrapper.m_Gameplay_Heal;
         public InputActionMap Get() { return m_Wrapper.m_Gameplay; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -203,15 +180,12 @@ public partial class @Inputs : IInputActionCollection2, IDisposable
                 @Shoot.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnShoot;
                 @Shoot.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnShoot;
                 @Shoot.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnShoot;
-                @SwitchGun01.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnSwitchGun01;
-                @SwitchGun01.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnSwitchGun01;
-                @SwitchGun01.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnSwitchGun01;
-                @SwitchGun02.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnSwitchGun02;
-                @SwitchGun02.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnSwitchGun02;
-                @SwitchGun02.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnSwitchGun02;
                 @SwitchGuns.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnSwitchGuns;
                 @SwitchGuns.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnSwitchGuns;
                 @SwitchGuns.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnSwitchGuns;
+                @Heal.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnHeal;
+                @Heal.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnHeal;
+                @Heal.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnHeal;
             }
             m_Wrapper.m_GameplayActionsCallbackInterface = instance;
             if (instance != null)
@@ -219,15 +193,12 @@ public partial class @Inputs : IInputActionCollection2, IDisposable
                 @Shoot.started += instance.OnShoot;
                 @Shoot.performed += instance.OnShoot;
                 @Shoot.canceled += instance.OnShoot;
-                @SwitchGun01.started += instance.OnSwitchGun01;
-                @SwitchGun01.performed += instance.OnSwitchGun01;
-                @SwitchGun01.canceled += instance.OnSwitchGun01;
-                @SwitchGun02.started += instance.OnSwitchGun02;
-                @SwitchGun02.performed += instance.OnSwitchGun02;
-                @SwitchGun02.canceled += instance.OnSwitchGun02;
                 @SwitchGuns.started += instance.OnSwitchGuns;
                 @SwitchGuns.performed += instance.OnSwitchGuns;
                 @SwitchGuns.canceled += instance.OnSwitchGuns;
+                @Heal.started += instance.OnHeal;
+                @Heal.performed += instance.OnHeal;
+                @Heal.canceled += instance.OnHeal;
             }
         }
     }
@@ -235,8 +206,7 @@ public partial class @Inputs : IInputActionCollection2, IDisposable
     public interface IGameplayActions
     {
         void OnShoot(InputAction.CallbackContext context);
-        void OnSwitchGun01(InputAction.CallbackContext context);
-        void OnSwitchGun02(InputAction.CallbackContext context);
         void OnSwitchGuns(InputAction.CallbackContext context);
+        void OnHeal(InputAction.CallbackContext context);
     }
 }

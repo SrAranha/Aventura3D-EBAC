@@ -7,13 +7,13 @@ public class HealthBase : MonoBehaviour, IDamageable
     public bool destroyOnDeath;
     public float timeToDestroy;
     public bool hasHealthBar;
-    public UIUpdater healthBarUpdater;
+    public HealthBarUI healthBarUpdater;
 
     public Action<HealthBase> OnDamage;
     public Action<HealthBase> OnDeath;
 
     [Header("DEBUG")]
-    private int _currentHealth;
+    [SerializeField] private int _currentHealth;
     private bool _isAlive = true;
     private Collider _collider;
 
@@ -33,6 +33,13 @@ public class HealthBase : MonoBehaviour, IDamageable
     public void ResetHealth()
     {
         _currentHealth = startingHealth;
+    }
+    public void Heal()
+    {
+        if (InventoryManager.instance.RemoveItemByType(ItemType.LIFE_PACK))
+        {
+            ResetHealth();
+        }
     }
     public void Damage(int damage)
     {

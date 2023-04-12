@@ -24,6 +24,7 @@ public class PlayerController : MonoBehaviour
     private Animator _animator;
     private float _verticalSpeed;
     private HealthBase _healthBase;
+    private Inputs _inputs;
 
     private void OnValidate()
     {
@@ -31,13 +32,24 @@ public class PlayerController : MonoBehaviour
         _controller = GetComponent<CharacterController>();
         _animator = GetComponentInChildren<Animator>();
     }
+    private void OnEnable()
+    {
+        _inputs?.Enable();
+    }
+    private void OnDisable()
+    {
+        _inputs?.Disable();
+    }
     private void Awake()
     {
+        _inputs = new Inputs();
+        _inputs.Enable();
         _healthBase.OnDamage += OnDamage;
         _healthBase.OnDeath += OnDeath;
     }
     private void Start()
     {
+        _inputs.Gameplay.Heal.performed += ctx => _healthBase.Heal();
         if (startAtLastCheckpoint)
         {
             SpawnAtLastCheckpoint();

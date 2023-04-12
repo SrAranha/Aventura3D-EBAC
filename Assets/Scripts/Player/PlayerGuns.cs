@@ -1,28 +1,26 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 public class PlayerGuns : MonoBehaviour
 {
     public List<GunBase> gunsList;
 
-    private Inputs inputs;
+    private Inputs _inputs;
     [SerializeField] private GunBase _activeGun;
     [SerializeField] private int _activeGunIndex;
 
     private void OnEnable()
     {
-        inputs?.Enable();
+        _inputs?.Enable();
     }
     private void OnDisable()
     {
-        inputs?.Disable();
+        _inputs?.Disable();
     }
     private void Awake()
     {
-        inputs = new Inputs();
-        inputs.Enable();
+        _inputs = new Inputs();
+        _inputs.Enable();
 
         foreach (GunBase gun in gunsList)
         {
@@ -33,7 +31,7 @@ public class PlayerGuns : MonoBehaviour
     }
     private void Start()
     {
-        inputs.Gameplay.SwitchGuns.performed += ctx => SwitchGun();
+        _inputs.Gameplay.SwitchGuns.performed += ctx => SwitchGun();
     }
 
     private void SwitchGun()
