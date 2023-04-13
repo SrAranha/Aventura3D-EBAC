@@ -53,6 +53,15 @@ public partial class @Inputs : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""OpenChest"",
+                    ""type"": ""Button"",
+                    ""id"": ""4cb7ea24-5828-4a75-ad4d-0f054020acc9"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -88,6 +97,17 @@ public partial class @Inputs : IInputActionCollection2, IDisposable
                     ""action"": ""Heal"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""f99cb334-f208-4b22-b4e3-aa5625305f4a"",
+                    ""path"": ""<Keyboard>/f"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""OpenChest"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -99,6 +119,7 @@ public partial class @Inputs : IInputActionCollection2, IDisposable
         m_Gameplay_Shoot = m_Gameplay.FindAction("Shoot", throwIfNotFound: true);
         m_Gameplay_SwitchGuns = m_Gameplay.FindAction("SwitchGuns", throwIfNotFound: true);
         m_Gameplay_Heal = m_Gameplay.FindAction("Heal", throwIfNotFound: true);
+        m_Gameplay_OpenChest = m_Gameplay.FindAction("OpenChest", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -161,6 +182,7 @@ public partial class @Inputs : IInputActionCollection2, IDisposable
     private readonly InputAction m_Gameplay_Shoot;
     private readonly InputAction m_Gameplay_SwitchGuns;
     private readonly InputAction m_Gameplay_Heal;
+    private readonly InputAction m_Gameplay_OpenChest;
     public struct GameplayActions
     {
         private @Inputs m_Wrapper;
@@ -168,6 +190,7 @@ public partial class @Inputs : IInputActionCollection2, IDisposable
         public InputAction @Shoot => m_Wrapper.m_Gameplay_Shoot;
         public InputAction @SwitchGuns => m_Wrapper.m_Gameplay_SwitchGuns;
         public InputAction @Heal => m_Wrapper.m_Gameplay_Heal;
+        public InputAction @OpenChest => m_Wrapper.m_Gameplay_OpenChest;
         public InputActionMap Get() { return m_Wrapper.m_Gameplay; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -186,6 +209,9 @@ public partial class @Inputs : IInputActionCollection2, IDisposable
                 @Heal.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnHeal;
                 @Heal.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnHeal;
                 @Heal.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnHeal;
+                @OpenChest.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnOpenChest;
+                @OpenChest.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnOpenChest;
+                @OpenChest.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnOpenChest;
             }
             m_Wrapper.m_GameplayActionsCallbackInterface = instance;
             if (instance != null)
@@ -199,6 +225,9 @@ public partial class @Inputs : IInputActionCollection2, IDisposable
                 @Heal.started += instance.OnHeal;
                 @Heal.performed += instance.OnHeal;
                 @Heal.canceled += instance.OnHeal;
+                @OpenChest.started += instance.OnOpenChest;
+                @OpenChest.performed += instance.OnOpenChest;
+                @OpenChest.canceled += instance.OnOpenChest;
             }
         }
     }
@@ -208,5 +237,6 @@ public partial class @Inputs : IInputActionCollection2, IDisposable
         void OnShoot(InputAction.CallbackContext context);
         void OnSwitchGuns(InputAction.CallbackContext context);
         void OnHeal(InputAction.CallbackContext context);
+        void OnOpenChest(InputAction.CallbackContext context);
     }
 }
