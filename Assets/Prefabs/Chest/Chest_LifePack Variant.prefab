@@ -1,0 +1,67 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &4598970212136632425
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 5829849163423042576, guid: 22280a5af6485dc46b4b446b94a62e80, type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5829849163423042576, guid: 22280a5af6485dc46b4b446b94a62e80, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 149.12518
+      objectReference: {fileID: 0}
+    - target: {fileID: 5829849163423042576, guid: 22280a5af6485dc46b4b446b94a62e80, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -10.727815
+      objectReference: {fileID: 0}
+    - target: {fileID: 5829849163423042576, guid: 22280a5af6485dc46b4b446b94a62e80, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 173.18
+      objectReference: {fileID: 0}
+    - target: {fileID: 5829849163423042576, guid: 22280a5af6485dc46b4b446b94a62e80, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 5829849163423042576, guid: 22280a5af6485dc46b4b446b94a62e80, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5829849163423042576, guid: 22280a5af6485dc46b4b446b94a62e80, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 5829849163423042576, guid: 22280a5af6485dc46b4b446b94a62e80, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5829849163423042576, guid: 22280a5af6485dc46b4b446b94a62e80, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5829849163423042576, guid: 22280a5af6485dc46b4b446b94a62e80, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: -90
+      objectReference: {fileID: 0}
+    - target: {fileID: 5829849163423042576, guid: 22280a5af6485dc46b4b446b94a62e80, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5829849163423042590, guid: 22280a5af6485dc46b4b446b94a62e80, type: 3}
+      propertyPath: m_Name
+      value: Chest_LifePack
+      objectReference: {fileID: 0}
+    - target: {fileID: 5829849163423042591, guid: 22280a5af6485dc46b4b446b94a62e80, type: 3}
+      propertyPath: itemType
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5829849163423042591, guid: 22280a5af6485dc46b4b446b94a62e80, type: 3}
+      propertyPath: itemToDrop
+      value: 
+      objectReference: {fileID: 5182869183115675805, guid: 53cc04675e7a1f6419e3dde646debe64, type: 3}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 22280a5af6485dc46b4b446b94a62e80, type: 3}

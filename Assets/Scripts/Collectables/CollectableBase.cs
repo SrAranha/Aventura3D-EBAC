@@ -6,12 +6,12 @@ public class CollectableBase : MonoBehaviour
     public float timeToHide;
     public GameObject model;
 
-    private string _playerTag = "Player";
-    private Collider _collider;
+    private readonly string _playerTag = "Player";
+    [SerializeField] private Collider _collider;
 
     private void OnValidate()
     {
-        _collider = GetComponent<Collider>();
+        if (_collider == null) _collider = GetComponent<Collider>();
     }
     private void OnTriggerEnter(Collider other)
     {

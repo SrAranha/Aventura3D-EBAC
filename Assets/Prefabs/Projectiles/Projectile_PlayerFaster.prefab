@@ -148,6 +148,7 @@ MonoBehaviour:
   timeToDestroy: 2
   tagsToHit:
   - Enemy
+  - Destructable
 --- !u!54 &7466505124079010932
 Rigidbody:
   m_ObjectHideFlags: 0

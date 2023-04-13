@@ -163,18 +163,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c75127a13c7eba4996eeeb3231b3dcd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemToDrop: {fileID: 1131000625059132893, guid: 56dbafa2238a563408832decf15c5478, type: 3}
+  itemToDrop: {fileID: 0}
+  itemType: 0
   quantityToDrop: 5
   dropPoint: {fileID: 8313348201687468596}
   randomDropArea: {x: -1, y: 1}
+  dropArea: {x: 1, y: 0, z: 0.5}
   itemDropDuration: 0.3
   chestTop: {fileID: 5196186807406045235}
-  animationDuration: 0.5
+  chestAnimDur: 0.5
   rotationClose: {x: -90, y: 0, z: 0}
   rotationOpen: {x: -200, y: 0, z: 0}
   interactionIcon: {fileID: 30788408882168505}
   lookAtCamera: 1
-  _items: []
 --- !u!135 &1700327355474884795
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -226,7 +227,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 3}
-  m_SizeDelta: {x: 3, y: 0.5}
+  m_SizeDelta: {x: 2, y: 2}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!223 &8964802005936622102
 Canvas:
