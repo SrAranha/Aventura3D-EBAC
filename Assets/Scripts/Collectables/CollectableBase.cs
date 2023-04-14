@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
@@ -9,6 +10,8 @@ public class CollectableBase : MonoBehaviour
     [Header("Spinning")]
     public Vector3 spinDirection;
     public float spinSpeed;
+    [Header("VFX")]
+    public ParticleSystem vfx;
 
     [Header("DEBUG")]
     [SerializeField] private Collider _collider;
@@ -32,8 +35,15 @@ public class CollectableBase : MonoBehaviour
     private void CollectItem()
     {
         _collider.enabled = false;
-        Destroy(gameObject);
+        StartCoroutine(HideObject());
+        vfx.Play();
         OnCollectItem();
+    }
+    IEnumerator HideObject()
+    {
+        model.SetActive(false);
+        yield return new WaitForSeconds(timeToHide);
+        Destroy(gameObject);
     }
     private void OnCollectItem()
     {
