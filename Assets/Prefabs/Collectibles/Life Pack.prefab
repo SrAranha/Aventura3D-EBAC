@@ -179,6 +179,9 @@ MonoBehaviour:
   itemType: 1
   timeToHide: 2
   model: {fileID: 5044615096974371127}
+  spinDirection: {x: 0, y: 1, z: 0}
+  spinSpeed: 50
+  _collider: {fileID: 2967406369691698670}
 --- !u!135 &2967406369691698670
 SphereCollider:
   m_ObjectHideFlags: 0

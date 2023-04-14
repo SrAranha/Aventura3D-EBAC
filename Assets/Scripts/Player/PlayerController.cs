@@ -74,7 +74,10 @@ public class PlayerController : MonoBehaviour
     }
     private void OnDamage(HealthBase health)
     {
-        ScreenShake.instance.ShakeScreen(shakeAmplitude, shakeFrequency, shakeTime);
+        if (ScreenShake.instance)
+        {
+            ScreenShake.instance.ShakeScreen(shakeAmplitude, shakeFrequency, shakeTime);
+        }
     }
     private void OnDeath(HealthBase health)
     {

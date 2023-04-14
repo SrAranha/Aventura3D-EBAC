@@ -2,6 +2,10 @@ using UnityEngine;
 
 public class SkinChangerBase : MonoBehaviour
 {
+    [Header("Spinning")]
+    public Vector3 spinDirection;
+    public float spinSpeed;
+    [Header("Skin Changer")]
     public SkinTypes skinType;
     public float skinDuration;
 
@@ -16,8 +20,16 @@ public class SkinChangerBase : MonoBehaviour
             Destroy(gameObject);
         }
     }
+    private void Update()
+    {
+        SpinCollectable();
+    }
     protected virtual void ChangeSkin()
     {
         SkinManager.instance.ChangeSkinByType(skinType, skinDuration);
+    }
+    private void SpinCollectable()
+    {
+        transform.RotateAround(transform.position, spinDirection, spinSpeed * Time.deltaTime);
     }
 }

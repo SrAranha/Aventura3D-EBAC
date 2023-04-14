@@ -3,13 +3,11 @@ using UnityEngine;
 
 public class ScreenShake : Singleton<ScreenShake>
 {
-    private CinemachineVirtualCamera _vCam;
+    public CinemachineVirtualCamera _vCam;
     private float _shakeTime;
-
     private CinemachineBasicMultiChannelPerlin _cinemachineNoise;
-    private void OnValidate()
+    private void Start()
     {
-        _vCam = GetComponent<CinemachineVirtualCamera>();
         _cinemachineNoise = _vCam.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>();
     }
     public void ShakeScreen(float amplitude, float frequency, float time)
