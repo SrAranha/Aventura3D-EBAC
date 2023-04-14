@@ -94,6 +94,32 @@ public class PlayerController : MonoBehaviour
         SpawnAtLastCheckpoint();
         _healthBase.Revive();
     }
+    #region SkinsEffects
+    public void AddHealth(int healthToAdd, float duration)
+    {
+        StartCoroutine(AddHealthCoroutine(healthToAdd, duration));
+    }
+    IEnumerator AddHealthCoroutine(int healthToAdd, float duration)
+    {
+        _healthBase.startingHealth += healthToAdd;
+        _healthBase.ResetHealth();
+        yield return new WaitForSeconds(duration);
+        _healthBase.startingHealth -= healthToAdd;
+        _healthBase.ResetHealth();
+    }
+    public void ChangeSpeed(float speedFactor, float duration)
+    {
+        StartCoroutine(ChangeSpeedCoroutine(speedFactor, duration));
+    }
+    IEnumerator ChangeSpeedCoroutine(float speedFactor, float duration)
+    {
+        moveSpeed *= speedFactor;
+        rotateSpeed *= speedFactor;
+        yield return new WaitForSeconds(duration);
+        moveSpeed /= speedFactor;
+        rotateSpeed /= speedFactor;
+    }
+    #endregion
     private void MovePlayer()
     {
         transform.Rotate(0, Input.GetAxis("Horizontal") * Time.deltaTime * rotateSpeed, 0);
