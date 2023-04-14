@@ -6,8 +6,11 @@ public class HealthBase : MonoBehaviour, IDamageable
     public int startingHealth;
     public bool destroyOnDeath;
     public float timeToDestroy;
+    [Header("Health Bar")]
     public bool hasHealthBar;
     public HealthBarUI healthBarUpdater;
+    [Header("Healing VFX")]
+    public ParticleSystem healingVFX;
 
     public Action<HealthBase> OnDamage;
     public Action<HealthBase> OnDeath;
@@ -38,6 +41,7 @@ public class HealthBase : MonoBehaviour, IDamageable
     {
         if (InventoryManager.instance.RemoveItemByType(ItemType.LIFE_PACK))
         {
+            healingVFX.Play();
             ResetHealth();
         }
     }
