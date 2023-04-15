@@ -2466,6 +2466,7 @@ MonoBehaviour:
   checkpoints:
   - {fileID: 699990592}
   - {fileID: 222198066}
+  _lastCheckpoint: 0
 --- !u!1001 &500120254
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5093,7 +5094,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 882378891}
-  m_LocalRotation: {x: 0.15423334, y: 0.000000013818373, z: -0.000000002157064, w: 0.9880344}
+  m_LocalRotation: {x: 0.15423334, y: -0.000000017000502, z: 0.0000000026537983, w: 0.9880344}
   m_LocalPosition: {x: 0, y: -0.00000089538224, z: -0.0000003283068}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -15485,7 +15486,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1636696122}
-  m_LocalRotation: {x: 0.13623597, y: -0, z: -1e-45, w: 0.9906764}
+  m_LocalRotation: {x: 0.13623597, y: -0, z: -0, w: 0.9906764}
   m_LocalPosition: {x: 0, y: -0.00000089538224, z: -0.0000003283068}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -15749,6 +15750,56 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 1089369195060177689, guid: 32c0aacaa76b2944abb3ed6602126f44, type: 3}
   m_PrefabInstance: {fileID: 1643913480}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1649541808
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1649541810}
+  - component: {fileID: 1649541809}
+  m_Layer: 0
+  m_Name: SaveManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1649541809
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1649541808}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f69a632f1122e3c43a6af52e88445cc8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _setup:
+    playerHealth: 0
+    lastLevel: 0
+    lastCheckpoint: -1
+    coins: 0
+    lifepacks: 0
+--- !u!4 &1649541810
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1649541808}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 458.5, y: 258, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 11
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1687589338
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -17350,7 +17401,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1858571231}
-  m_LocalRotation: {x: 0.118241265, y: 3e-45, z: -0, w: 0.99298495}
+  m_LocalRotation: {x: 0.118241265, y: -0, z: -0, w: 0.99298495}
   m_LocalPosition: {x: 0, y: -0.00000089538224, z: -0.0000003283068}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0

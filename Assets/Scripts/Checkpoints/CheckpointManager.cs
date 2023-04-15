@@ -6,11 +6,13 @@ public class CheckpointManager : Singleton<CheckpointManager>
     public List<CheckpointBase> checkpoints;
     public readonly string checkpointKey = "checkpoint_ID";
 
-    private int _lastCheckpoint;
+    [SerializeField] private int _lastCheckpoint;
+    private SaveManager _saveManager;
     // Start is called before the first frame update
     void Start()
     {
-        _lastCheckpoint = PlayerPrefs.GetInt(checkpointKey);
+        _saveManager = SaveManager.instance;
+        _lastCheckpoint = _saveManager.LoadLastCheckpoint();
         if (_lastCheckpoint > -1)
         {
             for (int i = 0; i <= _lastCheckpoint; i++)
@@ -31,6 +33,6 @@ public class CheckpointManager : Singleton<CheckpointManager>
         {
             checkpoint.CheckpointOff();
         }
-        PlayerPrefs.SetInt(checkpointKey, _lastCheckpoint);
+        _saveManager.SaveCheckpoint(_lastCheckpoint);
     }
 }

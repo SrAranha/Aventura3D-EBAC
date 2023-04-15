@@ -65,7 +65,7 @@ public class PlayerController : MonoBehaviour
     }
     private void SpawnAtLastCheckpoint()
     {
-        if (PlayerPrefs.GetInt(CheckpointManager.instance.checkpointKey) > -1)
+        if (SaveManager.instance.LoadLastCheckpoint() > -1)
         {
             var __checkPos = CheckpointManager.instance.LastCheckpointPosition();
             __checkPos.z += 3f;

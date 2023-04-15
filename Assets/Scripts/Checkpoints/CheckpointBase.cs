@@ -36,12 +36,12 @@ public class CheckpointBase : MonoBehaviour
     }
     private void SaveCheckpoint()
     {
-        _lastCheckpoint = PlayerPrefs.GetInt(_key);
+        _lastCheckpoint = SaveManager.instance.LoadLastCheckpoint();
         if (_lastCheckpoint < id)
         {
-            PlayerPrefs.SetInt(_key, id);
+            SaveManager.instance.SaveCheckpoint(id);
         }
-        _lastCheckpoint = PlayerPrefs.GetInt(_key);
+        _lastCheckpoint = SaveManager.instance.LoadLastCheckpoint();
     }
     private void OnTriggerEnter(Collider other)
     {
