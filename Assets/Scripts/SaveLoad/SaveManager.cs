@@ -63,7 +63,7 @@ public class SaveManager : Singleton<SaveManager>
     #region SAVE
     [NaughtyAttributes.Button]
     public void SaveGame()
-    {   
+    {
         SetGamePath();
         _saveGame = JsonUtility.ToJson(_curSave, true);
         File.WriteAllText(_saveGamePath, _saveGame);
@@ -93,13 +93,12 @@ public class SaveManager : Singleton<SaveManager>
     public void SavePlayerHealth(int currentLife)
     {
         _curSave.playerHealth = currentLife;
-        Debug.Log(_curSave.playerHealth);
     }
     #endregion
     [NaughtyAttributes.Button]
-    private void ResetSaveGame()
+    public void ResetSaveGame()
     {
-        _curSave.playerHealth = 0;
+        _curSave.playerHealth = 20;
         _curSave.lastLevel = 0;
         _curSave.lastCheckpoint = -1;
         _curSave.coins = 0;

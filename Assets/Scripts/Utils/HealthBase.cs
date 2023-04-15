@@ -30,6 +30,10 @@ public class HealthBase : MonoBehaviour, IDamageable
         if (GetComponent<PlayerController>())
         {
             _currentHealth = SaveManager.instance.LoadPlayerHealth();
+            if (_currentHealth <= 0)
+            {
+                ResetHealth();
+            }
         }
         else
         {
