@@ -50,9 +50,14 @@ public class PlayerController : MonoBehaviour
     private void Start()
     {
         _inputs.Gameplay.Heal.performed += ctx => _healthBase.Heal();
-        if (startAtLastCheckpoint)
+        if (startAtLastCheckpoint && SaveManager.instance.LoadLastCheckpoint() > -1)
         {
             SpawnAtLastCheckpoint();
+            if (transform.position != CheckpointManager.instance.LastCheckpointPosition())
+            {
+                Debug.Log("NOT IN POSITION!!!!");
+                SpawnAtLastCheckpoint();
+            }
         }
     }
     // Update is called once per frame
@@ -65,12 +70,9 @@ public class PlayerController : MonoBehaviour
     }
     private void SpawnAtLastCheckpoint()
     {
-        if (SaveManager.instance.LoadLastCheckpoint() > -1)
-        {
-            var __checkPos = CheckpointManager.instance.LastCheckpointPosition();
-            __checkPos.z += 3f;
-            transform.position = __checkPos;
-        }
+        var __checkPos = CheckpointManager.instance.LastCheckpointPosition();
+        __checkPos.z += 3f;
+        transform.position = __checkPos;
     }
     private void OnDamage(HealthBase health)
     {
