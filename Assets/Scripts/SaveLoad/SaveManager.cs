@@ -53,6 +53,11 @@ public class SaveManager : Singleton<SaveManager>
             }
         }
     }
+    public int LoadPlayerHealth()
+    {
+        return _curSave.playerHealth;
+    }
+
     #endregion
 
     #region SAVE
@@ -84,6 +89,11 @@ public class SaveManager : Singleton<SaveManager>
                     break;
             }
         }
+    }
+    public void SavePlayerHealth(int currentLife)
+    {
+        _curSave.playerHealth = currentLife;
+        Debug.Log(_curSave.playerHealth);
     }
     #endregion
     [NaughtyAttributes.Button]

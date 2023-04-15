@@ -27,7 +27,14 @@ public class HealthBase : MonoBehaviour, IDamageable
     // Start is called before the first frame update
     void Start()
     {
-        ResetHealth();
+        if (GetComponent<PlayerController>())
+        {
+            _currentHealth = SaveManager.instance.LoadPlayerHealth();
+        }
+        else
+        {
+            ResetHealth();
+        }
     }
     private void Update()
     {
@@ -36,6 +43,10 @@ public class HealthBase : MonoBehaviour, IDamageable
     public void ResetHealth()
     {
         _currentHealth = startingHealth;
+        if (GetComponent<PlayerController>())
+        {
+            SaveManager.instance.SavePlayerHealth(_currentHealth);
+        }
     }
     public void Heal()
     {
@@ -55,6 +66,7 @@ public class HealthBase : MonoBehaviour, IDamageable
                 Kill();
             }
             OnDamage?.Invoke(this);
+            SaveManager.instance.SavePlayerHealth(_currentHealth);
         }
     }
     private void Kill()
