@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class SaveManager : Singleton<SaveManager>
 {
-    [SerializeField] private SaveSetup _setup;
+    [SerializeField] private SaveSetup _curSave;
     private string _saveGamePath;
     private string _saveGame;
     private string _loadGame;
@@ -25,7 +25,7 @@ public class SaveManager : Singleton<SaveManager>
         if (File.Exists(_saveGamePath))
         {
             _loadGame = File.ReadAllText(_saveGamePath);
-            _setup = JsonUtility.FromJson<SaveSetup>(_loadGame);
+            _curSave = JsonUtility.FromJson<SaveSetup>(_loadGame);
         }
         else
         {
@@ -34,29 +34,75 @@ public class SaveManager : Singleton<SaveManager>
     }
     public int LoadLastCheckpoint()
     {
-        return _setup.lastCheckpoint;
+        return _curSave.lastCheckpoint;
+    }
+    public void LoadCollectables()
+    {
+        foreach (var item in InventoryManager.instance.itemSetups)
+        {
+            switch (item.itemType)
+            {
+                case ItemType.COIN:
+                    item.inventory.quantity = _curSave.coins;
+                    break;
+                case ItemType.LIFE_PACK:
+                    item.inventory.quantity = _curSave.lifepacks;
+                    break;
+                default:
+                    break;
+            }
+        }
     }
     #endregion
+
     #region SAVE
     [NaughtyAttributes.Button]
     public void SaveGame()
-    {
-        _saveGame = JsonUtility.ToJson(_setup, true);
-
+    {   
+        SetGamePath();
+        _saveGame = JsonUtility.ToJson(_curSave, true);
         File.WriteAllText(_saveGamePath, _saveGame);
     }
     public void SaveCheckpoint(int lastCheckpoint)
     {
-        _setup.lastCheckpoint = lastCheckpoint;
+        _curSave.lastCheckpoint = lastCheckpoint;
+    }
+    public void SaveCollectables()
+    {
+        foreach (var item in InventoryManager.instance.itemSetups)
+        {
+            var amount = item.inventory.quantity;
+            switch (item.itemType)
+            {
+                case ItemType.COIN:
+                    _curSave.coins = amount;
+                    break;
+                case ItemType.LIFE_PACK:
+                    _curSave.lifepacks = amount;
+                    break;
+                default:
+                    break;
+            }
+        }
     }
     #endregion
+    [NaughtyAttributes.Button]
+    private void ResetSaveGame()
+    {
+        _curSave.playerHealth = 0;
+        _curSave.lastLevel = 0;
+        _curSave.lastCheckpoint = -1;
+        _curSave.coins = 0;
+        _curSave.lifepacks = 0;
+        SaveGame();
+    }
 }
 [System.Serializable]
 public class SaveSetup
 {
     public int playerHealth;
     public int lastLevel;
-    public int lastCheckpoint = -1;
-    public int coins;
+    public int lastCheckpoint;
     public int lifepacks;
+    public int coins;
 }

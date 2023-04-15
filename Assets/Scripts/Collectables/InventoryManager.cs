@@ -10,12 +10,17 @@ public class InventoryManager : Singleton<InventoryManager>
     public InventoryUI inventoryUI;
     public List<ItemSetup> itemSetups;
 
+    private void Start()
+    {
+        SaveManager.instance.LoadCollectables();
+    }
     public void AddItemByType(ItemType type, int amount = 1)
     {
         if (amount < 1) return; 
         var item = itemSetups.Find(i => i.itemType == type);
         item.inventory.quantity += amount;
         inventoryUI.UpdateUI(type);
+        SaveManager.instance.SaveCollectables();
     }
     public bool RemoveItemByType(ItemType type, int amount = 1)
     {
@@ -24,6 +29,7 @@ public class InventoryManager : Singleton<InventoryManager>
         {
             item.inventory.quantity -= amount;
             inventoryUI.UpdateUI(type);
+            SaveManager.instance.SaveCollectables();
             return true;
         }
         else return false;
