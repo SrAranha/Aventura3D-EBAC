@@ -11,4 +11,9 @@ public class LoadScene : MonoBehaviour
     {
         SceneManager.LoadScene(scene);
     }
+    public void LoadAndPause(int scene)
+    {
+        SceneManager.LoadScene(scene);
+        UnityEditor.EditorApplication.isPaused = true;
+    }
 }

@@ -50,15 +50,17 @@ public class PlayerController : MonoBehaviour
     private void Start()
     {
         _inputs.Gameplay.Heal.performed += ctx => _healthBase.Heal();
-        if (startAtLastCheckpoint && SaveManager.instance.LoadLastCheckpoint() > -1)
-        {
-            SpawnAtLastCheckpoint();
-            if (transform.position != CheckpointManager.instance.LastCheckpointPosition())
-            {
-                Debug.Log("NOT IN POSITION!!!!");
-                SpawnAtLastCheckpoint();
-            }
-        }
+        Invoke(nameof(FirstSpawn), .1f);
+        //if (startAtLastCheckpoint && SaveManager.instance.LoadLastCheckpoint() > -1)
+        //{
+        //    SpawnAtLastCheckpoint();
+        //    var dist = Vector3.Distance(transform.position, CheckpointManager.instance.LastCheckpointPosition());
+        //    if (dist > 5)
+        //    {
+        //        Debug.Log("NOT IN POSITION!!!!");
+        //        SpawnAtLastCheckpoint();
+        //    }
+        //}
     }
     // Update is called once per frame
     void Update()
@@ -66,6 +68,13 @@ public class PlayerController : MonoBehaviour
         if (_healthBase.IsAlive())
         {
             MovePlayer();
+        }
+    }
+    private void FirstSpawn()
+    {
+        if (startAtLastCheckpoint && SaveManager.instance.LoadLastCheckpoint() > -1)
+        {
+            SpawnAtLastCheckpoint();
         }
     }
     private void SpawnAtLastCheckpoint()
@@ -134,11 +143,11 @@ public class PlayerController : MonoBehaviour
         bool __isMoving = __inputAxisVertical != 0;
 
         /* BUG:
-         * Quando segura ambos os valos/botões do eixo vertical (W & S || as setas ):
-         * o inputAxisVertical fica entre 0,1 e -0,1, deixando o isMoving true,
-         * assim a animação toca, mas o personagem nem sempre se mexe, ou sai muito lentamente do lugar
-         * dando a senação de patinar.
-         */
+            * Quando segura ambos os valos/botões do eixo vertical (W & S || as setas ):
+            * o inputAxisVertical fica entre 0,1 e -0,1, deixando o isMoving true,
+            * assim a animação toca, mas o personagem nem sempre se mexe, ou sai muito lentamente do lugar
+            * dando a senação de patinar.
+            */
 
         // Handle Jump
         if (_controller.isGrounded)
