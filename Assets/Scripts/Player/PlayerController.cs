@@ -19,12 +19,12 @@ public class PlayerController : MonoBehaviour
     public float shakeFrequency;
     public float shakeTime;
 
-    private readonly float gravity = -9.8f;
-    private CharacterController _controller;
+    private Inputs _inputs;
     private Animator _animator;
     private float _verticalSpeed;
     private HealthBase _healthBase;
-    private Inputs _inputs;
+    private readonly float gravity = -9.8f;
+    private CharacterController _controller;
 
     private void OnValidate()
     {
@@ -50,17 +50,10 @@ public class PlayerController : MonoBehaviour
     private void Start()
     {
         _inputs.Gameplay.Heal.performed += ctx => _healthBase.Heal();
-        Invoke(nameof(FirstSpawn), .1f);
-        //if (startAtLastCheckpoint && SaveManager.instance.LoadLastCheckpoint() > -1)
-        //{
-        //    SpawnAtLastCheckpoint();
-        //    var dist = Vector3.Distance(transform.position, CheckpointManager.instance.LastCheckpointPosition());
-        //    if (dist > 5)
-        //    {
-        //        Debug.Log("NOT IN POSITION!!!!");
-        //        SpawnAtLastCheckpoint();
-        //    }
-        //}
+        if (startAtLastCheckpoint && SaveManager.instance.LoadLastCheckpoint() > -1)
+        {
+            SpawnAtLastCheckpoint();
+        }
     }
     // Update is called once per frame
     void Update()
@@ -70,18 +63,13 @@ public class PlayerController : MonoBehaviour
             MovePlayer();
         }
     }
-    private void FirstSpawn()
-    {
-        if (startAtLastCheckpoint && SaveManager.instance.LoadLastCheckpoint() > -1)
-        {
-            SpawnAtLastCheckpoint();
-        }
-    }
     private void SpawnAtLastCheckpoint()
     {
+        _controller.enabled = false;
         var __checkPos = CheckpointManager.instance.LastCheckpointPosition();
         __checkPos.z += 3f;
         transform.position = __checkPos;
+        _controller.enabled = true;
     }
     private void OnDamage(HealthBase health)
     {

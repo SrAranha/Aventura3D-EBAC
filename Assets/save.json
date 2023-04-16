@@ -1,7 +1,7 @@
 {
-    "playerHealth": 18,
+    "playerHealth": 20,
     "lastLevel": 0,
-    "lastCheckpoint": 1,
-    "lifepacks": 6,
-    "coins": 7
+    "lastCheckpoint": 0,
+    "lifepacks": 0,
+    "coins": 1
 }

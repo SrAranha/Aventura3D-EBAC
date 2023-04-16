@@ -11,7 +11,6 @@ public class SaveManager : Singleton<SaveManager>
     {
         base.Awake();
         DontDestroyOnLoad(this);
-        LoadGame();
     }
     private void SetGamePath()
     {
@@ -31,6 +30,8 @@ public class SaveManager : Singleton<SaveManager>
         {
             Debug.Log("NO SAVE GAME FOUND");
         }
+        Debug.Log("LOADING SAVE GAME!");
+        Debug.Log(_loadGame);
     }
     public int LoadLastCheckpoint()
     {
@@ -104,6 +105,13 @@ public class SaveManager : Singleton<SaveManager>
         _curSave.coins = 0;
         _curSave.lifepacks = 0;
         SaveGame();
+        Debug.Log("RESETING SAVE GAME!");
+        Debug.Log(_curSave.ToString());
+    }
+    public void NewGame()
+    {
+        ResetSaveGame();
+        Invoke(nameof(LoadGame), .1f);
     }
 }
 [System.Serializable]
