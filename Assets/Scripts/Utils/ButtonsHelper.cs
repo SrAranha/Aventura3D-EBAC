@@ -32,6 +32,10 @@ public class ButtonsHelper : MonoBehaviour
     {
         SaveManager.instance.LoadGame();
     }
+    public void NewGame()
+    {
+        SaveManager.instance.NewGame();
+    }
     #endregion
     public void Exit()
     {
