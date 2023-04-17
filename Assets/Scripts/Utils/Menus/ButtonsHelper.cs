@@ -12,11 +12,6 @@ public class ButtonsHelper : MonoBehaviour
     {
         SceneManager.LoadScene(scene);
     }
-    public void LoadSceneAndPause(int scene)
-    {
-        SceneManager.LoadScene(scene);
-        UnityEditor.EditorApplication.isPaused = true;
-    }
     #endregion
     #region SAVE LOAD
     public void SaveGame()
