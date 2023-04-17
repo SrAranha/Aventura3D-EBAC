@@ -34,6 +34,7 @@ public class CollectableBase : MonoBehaviour
     }
     private void CollectItem()
     {
+        AudioManager.instance.PlaySFXByType(SFXType.COLLECTABLE);
         _collider.enabled = false;
         StartCoroutine(HideObject());
         vfx.Play();

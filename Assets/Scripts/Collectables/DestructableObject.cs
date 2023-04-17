@@ -22,6 +22,7 @@ public class DestructableObject : MonoBehaviour
     {
         for (int i = 0; i < quantityToDrop; i++)
         {
+            AudioManager.instance.PlaySFXByType(SFXType.DESTRUCTABLE);
             var item = Instantiate(itemToDrop);
             var newPos = transform.position + new Vector3(1, 0, 1) * Random.Range(randomDropArea.x, randomDropArea.z);
             newPos.y += randomDropArea.y; 

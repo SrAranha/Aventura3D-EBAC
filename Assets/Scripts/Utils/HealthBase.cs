@@ -56,6 +56,7 @@ public class HealthBase : MonoBehaviour, IDamageable
     {
         if (InventoryManager.instance.RemoveItemByType(ItemType.LIFE_PACK))
         {
+            AudioManager.instance.PlaySFXByType(SFXType.LIFEPACK);
             healingVFX.Play();
             ResetHealth();
         }

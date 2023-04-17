@@ -17,7 +17,7 @@ public class CheckpointManager : Singleton<CheckpointManager>
         {
             for (int i = 0; i <= _lastCheckpoint; i++)
             {
-                checkpoints[i].CheckpointOn();
+                checkpoints[i].CheckpointOn(false);
             }
         }
     }

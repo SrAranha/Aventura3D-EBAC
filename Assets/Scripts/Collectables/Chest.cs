@@ -78,6 +78,7 @@ public class Chest : MonoBehaviour
         if (_playerInRange)
         {
             if (_isOpened) return;
+            AudioManager.instance.PlaySFXByType(SFXType.CHEST);
             chestTop.transform.DOLocalRotate(rotationOpen, chestAnimDur);
             interactionIcon.SetActive(false);
             _isOpened = true;

@@ -17,6 +17,7 @@ public class SkinChangerBase : MonoBehaviour
         {
             _playerController = other.GetComponent<PlayerController>();
             ChangeSkin();
+            AudioManager.instance.PlaySFXByType(SFXType.COLLECTABLE);
             Destroy(gameObject);
         }
     }

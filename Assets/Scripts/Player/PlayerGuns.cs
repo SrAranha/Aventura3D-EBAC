@@ -36,6 +36,7 @@ public class PlayerGuns : MonoBehaviour
 
     private void SwitchGun()
     {
+        _activeGun.ResetGun();
         _activeGun.gameObject.SetActive(false);
         _activeGunIndex++;
         if (_activeGunIndex == gunsList.Count)
@@ -44,7 +45,6 @@ public class PlayerGuns : MonoBehaviour
         }
         _activeGun = gunsList[_activeGunIndex];
         _activeGun.gameObject.SetActive(true);
-        Debug.Log("Swithing to " + _activeGun);
     }
     private void ResetActiveGun()
     {

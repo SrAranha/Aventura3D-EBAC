@@ -22,8 +22,12 @@ public class CheckpointBase : MonoBehaviour
     {
         _key = CheckpointManager.instance.checkpointKey;
     }
-    public void CheckpointOn()
+    public void CheckpointOn(bool playMusic)
     {
+        if (playMusic)
+        {
+            AudioManager.instance.PlaySFXByType(SFXType.CHECKPOINT);
+        }
         _isActive = true;
         _meshRenderer.material.SetColor("_EmissionColor", Color.white);
         SaveCheckpoint();
@@ -49,7 +53,7 @@ public class CheckpointBase : MonoBehaviour
         {
             if (other.CompareTag("Player"))
             {
-                CheckpointOn();
+                CheckpointOn(true);
             }
         }
     }

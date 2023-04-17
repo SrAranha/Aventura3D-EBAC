@@ -27,8 +27,14 @@ public class GunBase : MonoBehaviour
     }
     private void Shoot()
     {
+        AudioManager.instance.PlaySFXByType(SFXType.SHOOT);
         var shoot = Instantiate(projectile);
         shoot.transform.SetPositionAndRotation(shootPoint.position, shootPoint.rotation);
+    }
+    public void ResetGun()
+    {
+        StopCoroutine(StartShoot());
+        _canShoot = true;
     }
     public IEnumerator StartShoot(Transform target = null)
     {
