@@ -168,7 +168,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   shootPoint: {fileID: 74972575}
-  projectile: {fileID: 6993000638423429594, guid: 5845b04715592db4a8b85d2fe2ebb44c, type: 3}
+  projectile: {fileID: 6993000638423429594, guid: ed9e51f2d1e285542bbd2c5fb26485e6, type: 3}
   timeBetweenShoots: 1.5
 --- !u!1001 &253782526270059833
 PrefabInstance:

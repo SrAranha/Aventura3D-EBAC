@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class SaveManager : Singleton<SaveManager>
 {
+    public bool hasPreviousSave;
     [SerializeField] private SaveSetup _curSave;
     private string _saveGamePath;
     private string _saveGame;
@@ -23,11 +24,13 @@ public class SaveManager : Singleton<SaveManager>
         SetGamePath();
         if (File.Exists(_saveGamePath))
         {
+            hasPreviousSave = true;
             _loadGame = File.ReadAllText(_saveGamePath);
             _curSave = JsonUtility.FromJson<SaveSetup>(_loadGame);
         }
         else
         {
+            hasPreviousSave = false;
             Debug.Log("NO SAVE GAME FOUND");
         }
     }

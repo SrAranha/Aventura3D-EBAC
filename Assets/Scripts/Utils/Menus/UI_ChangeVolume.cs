@@ -31,6 +31,10 @@ public class UI_ChangeVolume : MonoBehaviour
         inputField = GetComponentInChildren<TMP_InputField>();
         inputPlaceHolder = inputField.placeholder.GetComponent<TextMeshProUGUI>();
     }
+    private void Awake()
+    {
+        OnValidate();
+    }
     // Start is called before the first frame update
     void Start()
     {

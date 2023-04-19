@@ -16,6 +16,7 @@ public class DestructableObject : MonoBehaviour
     }
     private void Awake()
     {
+        OnValidate();
         _health.OnDeath += DropItems;
     }
     private void DropItems(HealthBase h)

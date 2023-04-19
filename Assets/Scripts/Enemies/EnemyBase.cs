@@ -12,7 +12,6 @@ public class EnemyBase : MonoBehaviour, IDamageable
 
     [SerializeField] private Collider _collider;
     [SerializeField] protected EnemyPathWalk _pathWalk;
-
     private void OnValidate()
     {
         _collider = GetComponent<Collider>();

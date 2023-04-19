@@ -16,6 +16,7 @@ public class CheckpointBase : MonoBehaviour
     }
     private void Awake()
     {
+        OnValidate();
         CheckpointOff();
     }
     private void Start()
@@ -36,7 +37,7 @@ public class CheckpointBase : MonoBehaviour
     {
         _isActive = false;
         _meshRenderer.material.SetColor("_EmissionColor", Color.black);
-        PlayerPrefs.SetInt(_key, id -1); // Desse modo, o último checkpoint é o anterior, mesmo se o jogador não tiver pego ele.
+        //PlayerPrefs.SetInt(_key, id -1); // Desse modo, o último checkpoint é o anterior, mesmo se o jogador não tiver pego ele.
     }
     private void SaveCheckpoint()
     {

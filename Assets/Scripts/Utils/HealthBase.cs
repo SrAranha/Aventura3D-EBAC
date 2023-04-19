@@ -24,6 +24,10 @@ public class HealthBase : MonoBehaviour, IDamageable
     {
         _collider = GetComponent<Collider>();
     }
+    private void Awake()
+    {
+        OnValidate();
+    }
     // Start is called before the first frame update
     void Start()
     {

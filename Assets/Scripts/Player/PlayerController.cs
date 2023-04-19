@@ -42,6 +42,7 @@ public class PlayerController : MonoBehaviour
     }
     private void Awake()
     {
+        OnValidate();
         _inputs = new Inputs();
         _inputs.Enable();
         _healthBase.OnDamage += OnDamage;

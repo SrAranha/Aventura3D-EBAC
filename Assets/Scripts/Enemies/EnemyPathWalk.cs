@@ -20,6 +20,7 @@ public class EnemyPathWalk : MonoBehaviour
     }
     void Start()
     {
+        OnValidate();
         StartWalking();
         ResetIndex();
     }
